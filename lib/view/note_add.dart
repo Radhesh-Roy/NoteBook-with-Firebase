@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:notebook/controller/noteadd/noteAdd.dart';
-import 'package:notebook/screen/homepage/note.dart';
 
 class NoteAddScreen extends StatefulWidget {
   const NoteAddScreen({super.key, this.id, this.note});
@@ -31,7 +29,6 @@ class _NoteAddState extends State<NoteAddScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: InkWell(
                 onTap: ()async{
-                  NoteAdd().noteAdd(data: notes.text);
                   //   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteHome(),));
                   FirebaseDatabase database = FirebaseDatabase.instanceFor(app: Firebase.app(),databaseURL: "https://notebook-f99b9-default-rtdb.asia-southeast1.firebasedatabase.app/");
                   await  database.ref("Name").push().set("Radhesh Roy");
