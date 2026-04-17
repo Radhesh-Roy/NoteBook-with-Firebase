@@ -35,6 +35,7 @@ class _NoteHomeState extends State<NoteHome> {
                 fontFamily: "Playfair",
               ),
             ),
+
             TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search_outlined, color: Colors.grey),
