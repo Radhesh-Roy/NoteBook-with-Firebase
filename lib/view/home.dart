@@ -51,6 +51,7 @@ class _NoteHomeState extends State<NoteHome> {
               ),
             ),
             Expanded(
+
               child: ListView.builder(
                 itemCount: 8,
                 itemBuilder: (context, index) => Dismissible(
