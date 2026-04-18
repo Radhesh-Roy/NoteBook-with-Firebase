@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "771266481554",
+    "firebase_url": "https://notebookfb-d7fbc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "notebookfb-d7fbc",
+    "storage_bucket": "notebookfb-d7fbc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771266481554:android:e5122ac4fafee53034854b",
+        "android_client_info": {
+          "package_name": "com.radehsh.note_book"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdxJyg5f7ZhtEDK3o-TfbnI_s2RTz17SM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

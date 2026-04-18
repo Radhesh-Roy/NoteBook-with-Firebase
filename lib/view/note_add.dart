@@ -3,17 +3,16 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:note_book/controller/note_add_controller/add_controller.dart';
 
-class NoteAddScreen extends StatefulWidget {
-  const NoteAddScreen({super.key, this.id, this.note});
-  final int? id;
-  final String? note;
+import 'home.dart';
 
-  @override
-  State<NoteAddScreen> createState() => _NoteAddState();
-}
-class _NoteAddState extends State<NoteAddScreen> {
-  TextEditingController notes= TextEditingController();
+class NoteAddScreen extends StatelessWidget {
+   NoteAddScreen({super.key,});
+
+   final NoteAddController controller=Get.put(NoteAddController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +26,20 @@ class _NoteAddState extends State<NoteAddScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: InkWell(
-                onTap: ()async{
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteHome(),));
-                  FirebaseDatabase database = FirebaseDatabase.instanceFor(app: Firebase.app(),databaseURL: "https://notebook-f99b9-default-rtdb.asia-southeast1.firebasedatabase.app/");
-                  await  database.ref("Name").push().set("Radhesh Roy");
-                  log("radhesh");
+            child: IconButton(
+                onPressed: (){
+               // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteHome(),));
+                  log("click");
 
                 },
-                child: Icon(Icons.check)),
+                icon: Icon(Icons.check)),
           )
         ],
       ),
       body: Column(
         children: [
           TextField(
+            controller: controller.titleC,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
             decoration: InputDecoration(
                 hintText: "Add Title",
@@ -54,7 +52,7 @@ class _NoteAddState extends State<NoteAddScreen> {
 
           Container(
             child: TextField(
-              controller: notes,
+              controller: controller.descriptionC,
               decoration: InputDecoration(
                   hintText: "Add Description",
                   border: OutlineInputBorder(
@@ -63,7 +61,6 @@ class _NoteAddState extends State<NoteAddScreen> {
               ),
             ),
           ),
-
         ],
       ),
     );

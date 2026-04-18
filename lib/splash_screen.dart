@@ -25,7 +25,7 @@ class _SplashscreenState extends State<Splashscreen> {
       backgroundColor: Colors.white,
       body: Center(
 
-        child: Image.asset("assets/Notebook.png", height: 250, width: 250,),
+        child: Image.asset("assets/img.png", height: 250, width: 250,),
       ),
     );
   }

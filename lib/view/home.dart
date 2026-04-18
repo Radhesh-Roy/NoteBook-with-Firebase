@@ -1,17 +1,15 @@
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../firebase_service.dart';
 import 'note_add.dart';
 import 'note_edit.dart';
 
-class NoteHome extends StatefulWidget {
+class NoteHome extends StatelessWidget {
   const NoteHome({super.key});
-  @override
-  State<NoteHome> createState() => _NoteHomeState();
-}
-class _NoteHomeState extends State<NoteHome> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +50,6 @@ class _NoteHomeState extends State<NoteHome> {
               ),
             ),
             Expanded(
-
               child: ListView.builder(
                 itemCount: 8,
                 itemBuilder: (context, index) => Dismissible(
@@ -85,7 +82,6 @@ class _NoteHomeState extends State<NoteHome> {
                   child: InkWell(
                     hoverColor: Colors.transparent,
                     onTap: () {
-
                     },
                     child: Container(
                       margin: EdgeInsets.all(3),
@@ -144,7 +140,7 @@ class _NoteHomeState extends State<NoteHome> {
         backgroundColor: Color(0xffE1E1E1),
         hoverColor: Colors.transparent,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(),));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => NoteAddScreen(),));
 
         },
         child: Center(child: Icon(Icons.add)),

@@ -35,22 +35,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBzoKwGn--eIxvgeROBALaSXOIqCOpYx48',
-    appId: '1:335464692578:android:f4db01f243b943e2b2ca3b',
-    messagingSenderId: '335464692578',
-    projectId: 'notebook-f99b9',
-    authDomain: 'salespro-19e86.firebaseapp.com',
+    apiKey: 'AIzaSyBdxJyg5f7ZhtEDK3o-TfbnI_s2RTz17SM',
+    appId: '1:771266481554:android:e5122ac4fafee53034854b',
+    messagingSenderId: '771266481554',
+    projectId: 'notebookfb-d7fbc',
+    authDomain: 'notebookfb-d7fbc.firebaseapp.com',
     storageBucket: 'notebook-f99b9.appspot.com',
   );
 
 
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBzoKwGn--eIxvgeROBALaSXOIqCOpYx48',
-    appId: '1:335464692578:android:f4db01f243b943e2b2ca3b',
-    messagingSenderId: '335464692578',
-    projectId: 'notebook-f99b9',
-    storageBucket: 'notebook-f99b9.appspot.com',
+    apiKey: 'AIzaSyBdxJyg5f7ZhtEDK3o-TfbnI_s2RTz17SM',
+    appId: '1:771266481554:android:e5122ac4fafee53034854b',
+    messagingSenderId: '771266481554',
+    projectId: 'notebookfb-d7fbc',
+    storageBucket: 'notebookfb-d7fbc.appspot.com',
   );
 
 
