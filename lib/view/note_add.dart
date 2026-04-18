@@ -30,6 +30,7 @@ class NoteAddScreen extends StatelessWidget {
                 onPressed: (){
                // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteHome(),));
                   log("click");
+                  controller.getData();
 
                 },
                 icon: Icon(Icons.check)),

@@ -8,10 +8,11 @@ TextEditingController titleC= TextEditingController();
 TextEditingController descriptionC= TextEditingController();
 
 void getData(){
-  String title= titleC.text;
-  String description= descriptionC.text;
-  log("$title");
-  log("$description");
+  Map addData={
+    "title": titleC.text,
+    "description": descriptionC.text
+  };
+  log("$addData");
 }
 
 }
