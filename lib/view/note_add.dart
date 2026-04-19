@@ -5,16 +5,15 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:note_book/controller/homeController/home_controller.dart';
 import 'package:note_book/controller/note_add_controller/add_controller.dart';
-
 import 'home.dart';
 
 class NoteAddScreen extends StatelessWidget {
    NoteAddScreen({super.key,});
+   final NoteAddController controller = Get.find<NoteAddController>();
 
-   final NoteAddController controller=Get.put(NoteAddController());
-
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffE1E1E1),
@@ -29,9 +28,8 @@ class NoteAddScreen extends StatelessWidget {
             child: IconButton(
                 onPressed: (){
                // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteHome(),));
-                  log("click");
-                  controller.getData();
-
+                  log("${controller.titleC}, ${controller.descriptionC}");
+                  log("Radhesh");
                 },
                 icon: Icon(Icons.check)),
           )

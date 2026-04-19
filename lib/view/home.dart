@@ -3,13 +3,19 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:note_book/controller/homeController/home_controller.dart';
+import 'package:note_book/controller/note_add_controller/add_controller.dart';
 
 import '../firebase_service.dart';
 import 'note_add.dart';
 import 'note_edit.dart';
 
 class NoteHome extends StatelessWidget {
-  const NoteHome({super.key});
+   NoteHome({super.key});
+
+   final HomeController controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +57,7 @@ class NoteHome extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 8,
+                itemCount: controller.data.length,
                 itemBuilder: (context, index) => Dismissible(
                   key: UniqueKey(),
                   direction: DismissDirection.horizontal,
