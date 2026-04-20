@@ -12,11 +12,27 @@ import '../firebase_service.dart';
 import 'note_add.dart';
 import 'note_edit.dart';
 
-class NoteHome extends StatelessWidget {
-   NoteHome({super.key});
+class NoteHome extends StatefulWidget {
 
-   final HomeController controller = Get.find<HomeController>();
+  final Map<String, dynamic> data;
+
+  NoteHome({super.key, required this.data});
   @override
+  State<NoteHome> createState() => _NoteHomeState();
+}
+
+class _NoteHomeState extends State<NoteHome> {
+  List allNotes= [];
+  void getNotes(){
+    allNotes.add(widget.data);
+
+  }
+  @override
+  void initState() {
+    getNotes();
+    super.initState();
+  }
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffE1E1E1),
@@ -57,7 +73,7 @@ class NoteHome extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: controller.data.length,
+                itemCount:allNotes.length,
                 itemBuilder: (context, index) => Dismissible(
                   key: UniqueKey(),
                   direction: DismissDirection.horizontal,
@@ -107,7 +123,7 @@ class NoteHome extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "No Title",
+                                    "${allNotes[index]["title"]}",
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Color(0xff444545),
@@ -118,14 +134,14 @@ class NoteHome extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "{day}/{month}/{year}",
+                                  "${DateTime.now()}}",
                                   style: TextStyle(color: Color(0xff444545)),
                                 ),
                               ],
                             ),
                             Expanded(
                               child: Text(
-                                "{noteData[index].note}",
+                                "${allNotes[index]["description"]}",
                                 style: TextStyle(color: Color(0xff444545)),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,

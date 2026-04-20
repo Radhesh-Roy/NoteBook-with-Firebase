@@ -11,7 +11,7 @@ class Splashscreen extends StatefulWidget {
 class _SplashscreenState extends State<Splashscreen> {
   splashNavigate() async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NoteHome(),));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NoteHome(data: {},),));
 
   }
   @override
