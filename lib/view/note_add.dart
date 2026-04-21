@@ -11,13 +11,14 @@ import 'home.dart';
 
 class NoteAddScreen extends StatelessWidget {
    NoteAddScreen({super.key,});
-   final NoteAddController controller = Get.find<NoteAddController>();
+   final NoteAddController controller = Get.put(NoteAddController());
 
    @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffE1E1E1),
       appBar: AppBar(
+
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         title: Text("Add Note", style: TextStyle(fontFamily: "Playfair", fontWeight: FontWeight.w600),),

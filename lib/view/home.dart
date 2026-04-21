@@ -15,7 +15,7 @@ import 'note_edit.dart';
 class NoteHome extends StatelessWidget {
    NoteHome({super.key});
 
-   final HomeController controller = Get.find<HomeController>();
+   final HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

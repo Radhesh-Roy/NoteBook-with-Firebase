@@ -15,8 +15,5 @@ void getData() {
     "title": titleC.text,
     "description": descriptionC.text,
   });
-
-  titleC.clear();
-  descriptionC.clear();
 }
 }
