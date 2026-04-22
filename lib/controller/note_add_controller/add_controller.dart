@@ -10,10 +10,12 @@ TextEditingController descriptionC= TextEditingController();
 
 final HomeController homeController = Get.find<HomeController>();
 
-void getData() {
-  homeController.data.add({
-    "title": titleC.text,
-    "description": descriptionC.text,
-  });
+ getData() {
+    RxMap data= {"title": titleC.text,
+      "description": descriptionC.text,
+    }.obs;
+
+  titleC.clear();
+  descriptionC.clear();
 }
 }
