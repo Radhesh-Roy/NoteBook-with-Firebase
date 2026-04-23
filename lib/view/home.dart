@@ -41,7 +41,6 @@ class _NoteHomeState extends State<NoteHome> {
       });
 
     }
-    log("$allNotes");
 
   }
   @override
@@ -98,9 +97,20 @@ class _NoteHomeState extends State<NoteHome> {
                   confirmDismiss: (direction) async{
                     if(direction==DismissDirection.endToStart){
 
+                      await db.ref().child("My Notes").child(allNotes[index]["id"]).remove();
+
+                   setState(() {
+
+                     allNotes.removeAt(index);
+                   });
                     }
                     else if(direction== DismissDirection.startToEnd){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit()));
+                      var data={
+                        "title": allNotes[index]["title"],
+                        "description": allNotes[index]["description"]
+
+                      };
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
                     }
                   },
                   background: Container(

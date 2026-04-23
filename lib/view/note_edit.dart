@@ -1,17 +1,33 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:note_book/firebase_service.dart';
 
 class NoteEdit extends StatefulWidget {
-  const NoteEdit({super.key,  this.id,  this.notes});
-
-  final int? id;
-  final String? notes;
+  final Map data;
+  const NoteEdit({super.key, required this.data });
 
   @override
   State<NoteEdit> createState() => _NoteAddState();
 
 }
 class _NoteAddState extends State<NoteEdit> {
-  TextEditingController Notesedit= TextEditingController();
+  TextEditingController titleC= TextEditingController();
+  TextEditingController descriptionC= TextEditingController();
+
+ void getData(){
+
+   titleC.text=widget.data["title"]??"";
+   descriptionC.text=widget.data["description"]??"";
+
+  }
+  @override
+  void initState() {
+
+    super.initState();
+getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +40,26 @@ class _NoteAddState extends State<NoteEdit> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: InkWell(
-                onTap: (){},
-                child: Icon(Icons.check)),
+            child: IconButton(
+                onPressed: ()async{
+                  await db.ref().child("My Notes").child(widget.data["id"]).update(
+                      {
+                        "title": widget.data["title"],
+                        "description": widget.data["description"]
+                      });
+                  log("Radhesh");
+                  Navigator.pop(context);
+                  
+                },icon: Icon(Icons.check),
+
+          )
           )
         ],
       ),
       body: Column(
         children: [
           TextField(
+            controller: titleC,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
             decoration: InputDecoration(
                 hintText: "Add Title",
@@ -45,7 +72,7 @@ class _NoteAddState extends State<NoteEdit> {
 
           Container(
             child: TextField(
-              controller:Notesedit,
+              controller:descriptionC,
               decoration: InputDecoration(
                   hintText: "Add Description",
                   border: OutlineInputBorder(
