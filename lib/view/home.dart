@@ -23,6 +23,7 @@ class NoteHome extends StatefulWidget {
 
 class _NoteHomeState extends State<NoteHome> {
   List allNotes= [];
+  List searchNote=[];
   void getNotes() async {
     DataSnapshot snapshot= await db.ref().child("My Notes").get();
     if(snapshot.exists){
@@ -35,6 +36,7 @@ class _NoteHomeState extends State<NoteHome> {
           "description": value["description"]
         });
       });
+      searchNote=List.from(allNotes);
 
       setState(() {
 
@@ -42,6 +44,13 @@ class _NoteHomeState extends State<NoteHome> {
 
     }
 
+  }
+
+  void getSearch({required String search}){
+searchNote=allNotes.where((element)=>element['title'].toString().toLowerCase().contains(search.toLowerCase()) || element["description"].toString().toLowerCase().contains(search.toLowerCase())).toList();
+setState(() {
+
+});
   }
   @override
   void initState() {
@@ -74,6 +83,9 @@ class _NoteHomeState extends State<NoteHome> {
             ),
 
             TextField(
+              onChanged: (value){
+                getSearch(search: value.toString());
+              },
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search_outlined, color: Colors.grey),
                 suffixIcon: Icon(Icons.mic, color: Colors.grey),
