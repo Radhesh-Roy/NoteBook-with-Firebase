@@ -106,12 +106,15 @@ class _NoteHomeState extends State<NoteHome> {
                     }
                     else if(direction== DismissDirection.startToEnd){
                       var data={
+                        "id":allNotes[index]["id"],
                         "title": allNotes[index]["title"],
                         "description": allNotes[index]["description"]
 
                       };
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
+                  await   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
+                      getNotes();
                     }
+
                   },
                   background: Container(
                     decoration: BoxDecoration(color: Colors.green),

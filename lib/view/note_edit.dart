@@ -44,11 +44,13 @@ getData();
                 onPressed: ()async{
                   await db.ref().child("My Notes").child(widget.data["id"]).update(
                       {
-                        "title": widget.data["title"],
-                        "description": widget.data["description"]
+                        "title": titleC.text,
+                        "description": descriptionC.text
                       });
-                  log("Radhesh");
-                  Navigator.pop(context);
+              Navigator.pop(context);
+
+
+                  log("${widget.data}");
                   
                 },icon: Icon(Icons.check),
 
