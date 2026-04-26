@@ -11,5 +11,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Splashscreen(),));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,
+
+    home: Splashscreen(),));
 }

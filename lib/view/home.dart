@@ -22,6 +22,7 @@ class NoteHome extends StatefulWidget {
 }
 
 class _NoteHomeState extends State<NoteHome> {
+
   List allNotes= [];
   List searchNote=[];
   void getNotes() async {
@@ -37,15 +38,9 @@ class _NoteHomeState extends State<NoteHome> {
         });
       });
       searchNote=List.from(allNotes);
-
-      setState(() {
-
-      });
-
+      setState(() {});
     }
-
   }
-
   void getSearch({required String search}){
 searchNote=allNotes.where((element)=>element['title'].toString().toLowerCase().contains(search.toLowerCase()) || element["description"].toString().toLowerCase().contains(search.toLowerCase())).toList();
 setState(() {
@@ -66,7 +61,18 @@ setState(() {
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
       ),
-      drawer: Drawer(backgroundColor: Color(0xffE1E1E1)),
+      drawer: Drawer(backgroundColor:Color(0xffE1E1E1),
+      
+      child: Center(child: Text(
+        "NoteBook",
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w600,
+          fontFamily: "Playfair",
+        ),
+      ),),
+      
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
