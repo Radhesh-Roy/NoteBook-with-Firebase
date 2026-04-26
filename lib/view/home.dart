@@ -100,21 +100,18 @@ setState(() {
                 ),
               ),
             ),
-            Expanded(
+            searchNote.isEmpty?Text("No Result Found"): Expanded(
               child: ListView.builder(
-                itemCount:allNotes.length,
+                itemCount:searchNote.length,
                 itemBuilder: (context, index) => Dismissible(
                   key: UniqueKey(),
                   direction: DismissDirection.horizontal,
                   confirmDismiss: (direction) async{
                     if(direction==DismissDirection.endToStart){
-
                       await db.ref().child("My Notes").child(allNotes[index]["id"]).remove();
-
-                   setState(() {
-
-                     allNotes.removeAt(index);
-                   });
+                      setState(() {
+                        allNotes.removeAt(index);
+                      });
                     }
                     else if(direction== DismissDirection.startToEnd){
                       var data={
@@ -123,7 +120,7 @@ setState(() {
                         "description": allNotes[index]["description"]
 
                       };
-                  await   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
+                      await   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
                       getNotes();
                     }
 
@@ -166,7 +163,7 @@ setState(() {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "${allNotes[index]["title"]}",
+                                    "${searchNote[index]["title"]}",
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Color(0xff444545),
@@ -184,7 +181,7 @@ setState(() {
                             ),
                             Expanded(
                               child: Text(
-                                "${allNotes[index]["description"]}",
+                                "${searchNote[index]["description"]}",
                                 style: TextStyle(color: Color(0xff444545)),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
