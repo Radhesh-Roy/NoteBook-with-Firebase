@@ -27,6 +27,7 @@ class _NoteHomeState extends State<NoteHome> {
   List searchNote=[];
 
   void getNotes() async {
+
     DataSnapshot snapshot= await db.ref().child("My Notes").get();
     if(snapshot.exists){
       Map data=snapshot.value as Map;
