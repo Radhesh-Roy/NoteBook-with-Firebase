@@ -44,6 +44,7 @@ class _NoteHomeState extends State<NoteHome> {
       setState(() {});
     }
   }
+
   void getSearch({required String search}){
 searchNote=allNotes.where((element)=>element['title'].toString().toLowerCase().contains(search.toLowerCase()) || element["description"].toString().toLowerCase().contains(search.toLowerCase())).toList();
 setState(() {
