@@ -50,6 +50,7 @@ searchNote=allNotes.where((element)=>element['title'].toString().toLowerCase().c
 setState(() {
 
 });
+
   }
   @override
   void initState() {
