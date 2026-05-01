@@ -18,6 +18,7 @@ class NoteHome extends StatefulWidget {
 
   NoteHome({super.key, required this.data});
   @override
+
   State<NoteHome> createState() => _NoteHomeState();
 }
 
