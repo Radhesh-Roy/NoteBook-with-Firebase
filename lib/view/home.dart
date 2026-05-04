@@ -25,7 +25,8 @@ class NoteHome extends StatefulWidget {
 class _NoteHomeState extends State<NoteHome> {
 
   List allNotes= [];
-  List searchNote=[];
+
+  String filterNote="";
 
   void getNotes() async {
 
@@ -41,14 +42,8 @@ class _NoteHomeState extends State<NoteHome> {
           "description": value["description"]
         });
       });
-      searchNote=List.from(allNotes);
       setState(() {});
     }
-  }
-  void getSearch({required String search}){
-searchNote=allNotes.where((element)=>element['title'].toString().toLowerCase().contains(search.toLowerCase()) || element["description"].toString().toLowerCase().contains(search.toLowerCase())).toList();
-setState(() { });
-
   }
   @override
   void initState() {
@@ -58,6 +53,10 @@ setState(() { });
   }
    @override
   Widget build(BuildContext context) {
+    List searchNote=allNotes.where((note){
+      return note["title"].toString().toLowerCase().contains(filterNote)|| note["description"].toString().toLowerCase().contains(filterNote);
+    }).toList();
+
     return Scaffold(
       backgroundColor: Color(0xffE1E1E1),
       appBar: AppBar(
@@ -93,7 +92,9 @@ setState(() { });
 
             TextField(
               onChanged: (value){
-                getSearch(search: value.toString());
+                setState(() {
+                  filterNote=value.toLowerCase();
+                });
               },
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search_outlined, color: Colors.grey),
@@ -112,96 +113,104 @@ setState(() { });
             searchNote.isEmpty?Text("No Result Found"): Expanded(
               child: ListView.builder(
                 itemCount:searchNote.length,
-                itemBuilder: (context, index) => Dismissible(
-                  key: UniqueKey(),
-                  direction: DismissDirection.horizontal,
-                  confirmDismiss: (direction) async{
-                    if(direction==DismissDirection.endToStart){
-                      await db.ref().child("My Notes").child(allNotes[index]["id"]).remove();
-                      setState(() {
-                        allNotes.removeAt(index);
-                      });
-                    }
-                    else if(direction== DismissDirection.startToEnd){
-                      var data={
-                        "id":allNotes[index]["id"],
-                        "title": allNotes[index]["title"],
-                        "description": allNotes[index]["description"]
+                itemBuilder: (context, index){
+                  var note=searchNote[index];
+                  var id=note["id"];
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.horizontal,
+                    confirmDismiss: (direction) async{
+                      if(direction==DismissDirection.endToStart){
+                        await db.ref().child("My Notes").child(id).remove();
+                        getNotes();
+                        setState(() {
+                          allNotes.removeWhere((n) => n["id"] == note["id"]);
+                        });
+                        return true;
+                      }
+                      else if(direction== DismissDirection.startToEnd){
+                        // var data={
+                        //   "id":allNotes[index]["id"],
+                        //   "title": allNotes[index]["title"],
+                        //   "description": allNotes[index]["description"]
+                        //
+                        // };
+                        await   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: note,)));
+                        getNotes();
+                        return false;
+                      }
+                      return false;
 
-                      };
-                      await   Navigator.push(context, MaterialPageRoute(builder: (context) => NoteEdit(data: data,)));
-                      getNotes();
-                    }
-
-                  },
-                  background: Container(
-                    decoration: BoxDecoration(color: Colors.green),
-                    child: Center(
-                      child: Icon(
-                        Icons.edit_note,
-                        size: 35,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  secondaryBackground: Container(
-                    decoration: BoxDecoration(color: Colors.red),
-                    child: Center(
-                      child: Icon(Icons.delete, size: 30, color: Colors.white),
-                    ),
-                  ),
-                  child: InkWell(
-                    hoverColor: Colors.transparent,
-                    onTap: () {
                     },
-                    child: Container(
-                      margin: EdgeInsets.all(3),
-                      height: 70,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xff0ffEFEFEF),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "${searchNote[index]["title"]}",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xff444545),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                Text(
-                                  "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
-                                  style: TextStyle(color: Color(0xff444545)),
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                              child: Text(
-                                "${searchNote[index]["description"]}",
-                                style: TextStyle(color: Color(0xff444545)),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-                          ],
+                    background: Container(
+                      decoration: BoxDecoration(color: Colors.green),
+                      child: Center(
+                        child: Icon(
+                          Icons.edit_note,
+                          size: 35,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  ),
-                ),
+                    secondaryBackground: Container(
+                      decoration: BoxDecoration(color: Colors.red),
+                      child: Center(
+                        child: Icon(Icons.delete, size: 30, color: Colors.white),
+                      ),
+                    ),
+                    child: InkWell(
+                      hoverColor: Colors.transparent,
+                      onTap: () {
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(3),
+                        height: 70,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Color(0xff0ffEFEFEF),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "${searchNote[index]["title"]}",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Color(0xff444545),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+                                    style: TextStyle(color: Color(0xff444545)),
+                                  ),
+                                ],
+                              ),
+                              Expanded(
+                                child: Text(
+                                  "${searchNote[index]["description"]}",
+                                  style: TextStyle(color: Color(0xff444545)),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
               ),
             ),
           ],
