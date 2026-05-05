@@ -201,6 +201,7 @@ class _NoteHomeState extends State<NoteHome> {
                               ),
 
                               Expanded(
+
                                 child: Text(
                                   "${searchNote[index]["description"]}",
                                   style: TextStyle(color: Color(0xff444545)),
