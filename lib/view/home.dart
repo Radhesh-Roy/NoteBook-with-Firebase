@@ -17,6 +17,7 @@ class NoteHome extends StatefulWidget {
   final Map<String, dynamic> data;
 
   NoteHome({super.key, required this.data});
+
   @override
 
   State<NoteHome> createState() => _NoteHomeState();
@@ -85,10 +86,12 @@ class _NoteHomeState extends State<NoteHome> {
               "Notes",
               style: TextStyle(
                 fontSize: 30,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 fontFamily: "Playfair",
               ),
             ),
+
+
 
             TextField(
               onChanged: (value){
@@ -182,7 +185,7 @@ class _NoteHomeState extends State<NoteHome> {
                                     child: Text(
                                       "${searchNote[index]["title"]}",
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 19,
                                         color: Color(0xff444545),
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -196,6 +199,7 @@ class _NoteHomeState extends State<NoteHome> {
                                   ),
                                 ],
                               ),
+
                               Expanded(
                                 child: Text(
                                   "${searchNote[index]["description"]}",
