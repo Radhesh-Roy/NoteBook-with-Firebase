@@ -143,7 +143,6 @@ class _NoteHomeState extends State<NoteHome> {
                         return false;
                       }
                       return false;
-
                     },
                     background: Container(
                       decoration: BoxDecoration(color: Colors.green),
@@ -199,7 +198,6 @@ class _NoteHomeState extends State<NoteHome> {
                                   ),
                                 ],
                               ),
-
                               Expanded(
 
                                 child: Text(
