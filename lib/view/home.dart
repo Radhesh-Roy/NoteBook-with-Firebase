@@ -199,7 +199,6 @@ class _NoteHomeState extends State<NoteHome> {
                                 ],
                               ),
                               Expanded(
-
                                 child: Text(
                                   "${searchNote[index]["description"]}",
                                   style: TextStyle(color: Color(0xff444545)),
@@ -224,9 +223,7 @@ class _NoteHomeState extends State<NoteHome> {
         hoverColor: Colors.transparent,
         onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => NoteAddScreen(),));
-
        getNotes();
-
         },
         child: Center(child: Icon(Icons.add)),
       ),
