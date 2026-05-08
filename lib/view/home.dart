@@ -146,6 +146,7 @@ class _NoteHomeState extends State<NoteHome> {
                     },
 
                     background: Container(
+
                       decoration: BoxDecoration(color: Colors.green),
                       child: Center(
                         child: Icon(
