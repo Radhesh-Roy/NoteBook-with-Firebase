@@ -144,6 +144,7 @@ class _NoteHomeState extends State<NoteHome> {
                       }
                       return false;
                     },
+
                     background: Container(
                       decoration: BoxDecoration(color: Colors.green),
                       child: Center(
